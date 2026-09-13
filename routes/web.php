@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Somente administradores.
     Route::middleware('role:admin')->group(function () {
+        Route::resource('manufacturers', ManufacturerController::class)->except('show');
         Route::resource('users', UserController::class)->only(['index', 'edit', 'update', 'destroy']);
     });
 });

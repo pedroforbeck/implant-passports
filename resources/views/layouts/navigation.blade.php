@@ -6,6 +6,7 @@
     ];
 
     if ($currentUser->isAdmin()) {
+        $links[] = ['label' => 'Fabricantes', 'route' => 'manufacturers.index', 'active' => ['manufacturers.*']];
         $links[] = ['label' => 'Usuários', 'route' => 'users.index', 'active' => ['users.*']];
     }
 @endphp
