@@ -4,6 +4,10 @@
     $links = [
         ['label' => 'Painel', 'route' => 'dashboard', 'active' => ['dashboard']],
     ];
+
+    if ($currentUser->isAdmin()) {
+        $links[] = ['label' => 'Usuários', 'route' => 'users.index', 'active' => ['users.*']];
+    }
 @endphp
 
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
