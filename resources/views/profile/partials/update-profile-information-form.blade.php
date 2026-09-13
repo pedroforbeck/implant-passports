@@ -47,6 +47,11 @@
             @endif
         </div>
 
+        <div>
+            <x-input-label value="Perfil de acesso" />
+            <p class="mt-1 text-sm text-gray-900">{{ $user->role->label() }}</p>
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>Salvar</x-primary-button>
 

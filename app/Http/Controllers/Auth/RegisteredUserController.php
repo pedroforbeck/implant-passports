@@ -25,6 +25,9 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
+     * O campo role não é aceito aqui: toda conta nova nasce como paciente
+     * e só o administrador pode promovê-la.
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse

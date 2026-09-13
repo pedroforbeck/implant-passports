@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <p class="mb-4 text-sm text-gray-600">
+        Contas novas são criadas com o perfil <strong>paciente</strong>. Depois do cadastro, peça ao seu médico para vincular sua conta à sua ficha.
+    </p>
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
