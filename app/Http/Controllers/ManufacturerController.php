@@ -16,6 +16,7 @@ class ManufacturerController extends Controller
         Gate::authorize('viewAny', Manufacturer::class);
 
         $manufacturers = Manufacturer::query()
+            ->withCount('devices')
             ->orderBy('name')
             ->paginate(15);
 
@@ -57,6 +58,10 @@ class ManufacturerController extends Controller
     public function destroy(Manufacturer $manufacturer): RedirectResponse
     {
         Gate::authorize('delete', $manufacturer);
+
+        if ($manufacturer->devices()->exists()) {
+            return back()->with('error', 'Não é possível remover um fabricante com dispositivos vinculados.');
+        }
 
         $manufacturer->delete();
 

@@ -18,6 +18,7 @@
                             <th class="px-6 py-3">Nome</th>
                             <th class="px-6 py-3">País</th>
                             <th class="px-6 py-3">Site</th>
+                            <th class="px-6 py-3">Dispositivos</th>
                             <th class="px-6 py-3"><span class="sr-only">Ações</span></th>
                         </tr>
                     </thead>
@@ -33,6 +34,7 @@
                                         —
                                     @endif
                                 </td>
+                                <td class="px-6 py-4">{{ $manufacturer->devices_count }}</td>
                                 <td class="px-6 py-4 text-right whitespace-nowrap">
                                     <a href="{{ route('manufacturers.edit', $manufacturer) }}" class="text-indigo-600 hover:text-indigo-900">Editar</a>
 
@@ -45,7 +47,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="px-6 py-8 text-center text-gray-500">Nenhum fabricante cadastrado.</td>
+                                <td colspan="5" class="px-6 py-8 text-center text-gray-500">Nenhum fabricante cadastrado.</td>
                             </tr>
                         @endforelse
                     </tbody>
