@@ -28,9 +28,6 @@ class UpdateUserRequest extends FormRequest
     }
 
     /**
-     * Impede que o administrador tire o próprio acesso e fique sem ninguém
-     * para gerenciar o sistema.
-     *
      * @return array<int, callable>
      */
     public function after(): array

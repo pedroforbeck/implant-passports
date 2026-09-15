@@ -12,7 +12,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Permite usar ->middleware('role:admin,medico') nas rotas.
         $middleware->alias([
             'role' => EnsureUserHasRole::class,
         ]);

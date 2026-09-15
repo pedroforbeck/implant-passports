@@ -16,9 +16,6 @@ class UserPolicy
         return $user->isAdmin();
     }
 
-    /**
-     * O administrador não pode excluir a própria conta por aqui.
-     */
     public function delete(User $user, User $model): bool
     {
         return $user->isAdmin() && ! $user->is($model);

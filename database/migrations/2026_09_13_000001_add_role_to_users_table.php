@@ -9,7 +9,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Valores possíveis em App\Enums\Role: admin, medico, paciente.
             $table->string('role', 20)->default('paciente')->index();
         });
     }

@@ -10,7 +10,6 @@ Route::view('/', 'welcome')->name('home');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-    // Somente administradores.
     Route::middleware('role:admin')->group(function () {
         Route::resource('manufacturers', ManufacturerController::class)->except('show');
         Route::resource('users', UserController::class)->only(['index', 'edit', 'update', 'destroy']);

@@ -5,9 +5,6 @@ namespace App\Policies;
 use App\Models\Manufacturer;
 use App\Models\User;
 
-/**
- * O cadastro de fabricantes é exclusivo do administrador.
- */
 class ManufacturerPolicy
 {
     public function before(User $user, string $ability): ?bool

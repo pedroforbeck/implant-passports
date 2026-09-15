@@ -2,9 +2,6 @@
 
 namespace App\Enums;
 
-/**
- * Perfis de acesso guardados na coluna users.role.
- */
 enum Role: string
 {
     case Admin = 'admin';

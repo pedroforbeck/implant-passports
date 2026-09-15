@@ -25,8 +25,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * Todo usuário novo (ex: cadastro pelo Breeze) começa como paciente.
-     *
      * @var array<string, mixed>
      */
     protected $attributes = [

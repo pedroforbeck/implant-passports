@@ -1,9 +1,5 @@
 <?php
 
-/*
- * Mensagens das regras usadas no projeto. Regras não listadas aqui
- * caem no inglês (APP_FALLBACK_LOCALE=en).
- */
 return [
     'accepted' => 'O campo :attribute deve ser aceito.',
     'after_or_equal' => 'O campo :attribute deve ser uma data igual ou posterior a :date.',
@@ -60,7 +56,6 @@ return [
         'current_password' => 'senha atual',
     ],
 
-    // Traduz "today" em regras como before:today.
     'values' => [
         'birth_date' => ['today' => 'hoje'],
         'implanted_at' => ['today' => 'hoje'],

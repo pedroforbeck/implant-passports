@@ -5,9 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-/**
- * Contas de demonstração. Senha de todas: password
- */
 class UserSeeder extends Seeder
 {
     public function run(): void

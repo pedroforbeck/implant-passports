@@ -10,9 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
-/**
- * Gestão de contas e perfis (role) pelo administrador.
- */
 class UserController extends Controller
 {
     public function index(Request $request): View

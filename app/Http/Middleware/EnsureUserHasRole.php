@@ -7,11 +7,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Bloqueia a rota para quem não tem um dos perfis informados.
- *
- * Uso: Route::middleware('role:admin,medico')
- */
 class EnsureUserHasRole
 {
     public function handle(Request $request, Closure $next, string ...$roles): Response
