@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\ManufacturerFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Manufacturer extends Model
 {
@@ -19,4 +20,9 @@ class Manufacturer extends Model
         'country',
         'website',
     ];
+
+    public function devices(): HasMany
+    {
+        return $this->hasMany(Device::class);
+    }
 }

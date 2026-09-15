@@ -6,6 +6,8 @@ use App\Enums\Role;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -69,6 +71,21 @@ class User extends Authenticatable
     public function isPatient(): bool
     {
         return $this->role === Role::Patient;
+    }
+
+    public function patientProfile(): HasOne
+    {
+        return $this->hasOne(Patient::class);
+    }
+
+    public function patients(): HasMany
+    {
+        return $this->hasMany(Patient::class, 'doctor_id');
+    }
+
+    public function checkups(): HasMany
+    {
+        return $this->hasMany(Checkup::class, 'doctor_id');
     }
 
     public function scopeWithRole(Builder $query, Role $role): void
