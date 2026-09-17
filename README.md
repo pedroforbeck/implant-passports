@@ -45,3 +45,8 @@ Todos usam a senha `password`.
 | Médica        | medica@passaporte.test    |
 | Médico        | medico@passaporte.test    |
 | Paciente      | paciente@passaporte.test  |
+
+## Decisões de domínio
+
+- Pacientes não são apagáveis: o histórico clínico (dispositivos e acompanhamentos) deve ser preservado para fins médicos e legais.
+- Dispositivos e acompanhamentos podem ser removidos apenas por administradores.

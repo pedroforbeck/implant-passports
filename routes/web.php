@@ -15,7 +15,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('role:admin')->group(function () {
         Route::resource('manufacturers', ManufacturerController::class)->except('show');
-        Route::resource('users', UserController::class)->only(['index', 'edit', 'update', 'destroy']);
+        Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     });
 
     Route::resource('patients', PatientController::class)->except('destroy');

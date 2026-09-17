@@ -1,6 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Usuários</h2>
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Usuários</h2>
+
+            @can('create', App\Models\User::class)
+                <x-link-button :href="route('users.create')">Novo usuário</x-link-button>
+            @endcan
+        </div>
     </x-slot>
 
     <div class="py-12">

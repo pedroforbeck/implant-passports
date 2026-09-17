@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Role;
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -29,6 +30,25 @@ class UserController extends Controller
             'users' => $users,
             'roles' => Role::cases(),
         ]);
+    }
+
+    public function create(): View
+    {
+        Gate::authorize('create', User::class);
+
+        return view('users.create', [
+            'user' => new User,
+            'roles' => Role::cases(),
+        ]);
+    }
+
+    public function store(StoreUserRequest $request): RedirectResponse
+    {
+        User::create($request->validated());
+
+        return redirect()
+            ->route('users.index')
+            ->with('success', 'Usuário cadastrado.');
     }
 
     public function edit(User $user): View
