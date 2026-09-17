@@ -10,7 +10,9 @@
             </div>
 
             <div class="flex items-center gap-2">
-                <x-link-button variant="secondary" :href="route('devices.index')">Todos os dispositivos</x-link-button>
+                @can('viewAny', App\Models\Device::class)
+                    <x-link-button variant="secondary" :href="route('devices.index')">Todos os dispositivos</x-link-button>
+                @endcan
 
                 @can('update', $device)
                     <x-link-button variant="secondary" :href="route('devices.edit', $device)">Editar</x-link-button>

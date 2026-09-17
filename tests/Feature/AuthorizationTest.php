@@ -25,8 +25,10 @@ class AuthorizationTest extends TestCase
     {
         $admin = User::factory()->admin()->create();
         $doctor = User::factory()->doctor()->create();
+        $patient = User::factory()->patient()->create();
 
         $this->actingAs($doctor)->get(route('users.index'))->assertForbidden();
+        $this->actingAs($patient)->get(route('users.index'))->assertForbidden();
         $this->actingAs($admin)->get(route('users.index'))->assertOk();
     }
 

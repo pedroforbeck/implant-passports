@@ -25,6 +25,6 @@ class CheckupPolicy
 
     public function delete(User $user, Checkup $checkup): bool
     {
-        return $user->can('update', $checkup->device);
+        return false;
     }
 }

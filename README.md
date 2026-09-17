@@ -9,12 +9,20 @@ Projeto final da disciplina, feito com **Laravel 12** e **PostgreSQL**.
 - Sofia Scheidt Alves — [função/partes desenvolvidas]
 - Pedro Forbeck da Matta Oliveira — [função/partes desenvolvidas]
 
-## Requisitos
+## Requisitos do ambiente
 
-- PHP 8.2 ou superior, com as extensões `pdo_pgsql` e `pgsql` habilitadas
+- PHP 8.2 ou superior
 - Composer
-- PostgreSQL
+- PostgreSQL (com as extensões do PHP `pdo_pgsql` e `pgsql`)
 - Node.js 18 ou superior
+
+As extensões `pdo_pgsql` e `pgsql` não acompanham o PHP por padrão. Em distribuições baseadas no Debian/Ubuntu, instale o pacote correspondente à versão do PHP antes do `composer install`:
+
+```bash
+sudo apt install php-pgsql   # ajuste o nome do pacote para a sua versão do PHP (ex.: php8.2-pgsql)
+```
+
+Em outras plataformas, instale a extensão equivalente (`php-pgsql`/`pdo_pgsql` no pacote de extensões do ambiente usado). Confirme com `php -m | grep pgsql` antes de seguir.
 
 ## Instalação
 
@@ -45,3 +53,13 @@ Todos usam a senha `password`.
 | Médica        | medica@passaporte.test    |
 | Médico        | medico@passaporte.test    |
 | Paciente      | paciente@passaporte.test  |
+
+## Decisões de domínio
+
+- Pacientes não são apagáveis: o histórico clínico (dispositivos e acompanhamentos) deve ser preservado para fins médicos e legais.
+- Dispositivos e acompanhamentos podem ser removidos apenas por administradores.
+- O paciente não consegue vincular o próprio passaporte pela conta: o vínculo entre a conta de acesso e o registro do paciente é feito pelo médico ou administrador (limitação conhecida, para evitar apropriação indevida de dados clínicos).
+
+## Decisões técnicas
+
+- A verificação de e-mail não é um requisito coberto pelo projeto: o middleware `verified` foi removido das rotas autenticadas, então qualquer conta criada (inclusive via cadastro público) já entra no sistema após o login, sem precisar confirmar e-mail.

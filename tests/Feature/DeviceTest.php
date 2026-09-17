@@ -159,4 +159,16 @@ class DeviceTest extends TestCase
 
         $this->assertDatabaseMissing('devices', ['id' => $device->id]);
     }
+
+    public function test_doctor_cannot_delete_device(): void
+    {
+        $doctor = User::factory()->doctor()->create();
+        $device = Device::factory()->for(Patient::factory()->for($doctor, 'doctor'))->create();
+
+        $this->actingAs($doctor)
+            ->delete(route('devices.destroy', $device))
+            ->assertForbidden();
+
+        $this->assertDatabaseHas('devices', ['id' => $device->id]);
+    }
 }

@@ -114,6 +114,18 @@ class CheckupTest extends TestCase
             ->assertForbidden();
     }
 
+    public function test_checkup_accessed_via_wrong_device_returns_not_found(): void
+    {
+        $doctor = User::factory()->doctor()->create();
+        $device = $this->makeDeviceFor($doctor);
+        $otherDevice = $this->makeDeviceFor($doctor);
+        $checkup = Checkup::factory()->for($device)->for($doctor, 'doctor')->create();
+
+        $this->actingAs($doctor)
+            ->get(route('devices.checkups.edit', [$otherDevice, $checkup]))
+            ->assertNotFound();
+    }
+
     public function test_doctor_can_view_own_device_checkup_history(): void
     {
         $doctor = User::factory()->doctor()->create();
@@ -137,5 +149,18 @@ class CheckupTest extends TestCase
             ->assertRedirect();
 
         $this->assertDatabaseMissing('checkups', ['id' => $checkup->id]);
+    }
+
+    public function test_doctor_cannot_delete_checkup(): void
+    {
+        $doctor = User::factory()->doctor()->create();
+        $device = $this->makeDeviceFor($doctor);
+        $checkup = Checkup::factory()->for($device)->for($doctor, 'doctor')->create();
+
+        $this->actingAs($doctor)
+            ->delete(route('devices.checkups.destroy', [$device, $checkup]))
+            ->assertForbidden();
+
+        $this->assertDatabaseHas('checkups', ['id' => $checkup->id]);
     }
 }

@@ -24,4 +24,16 @@ class CheckupFactory extends Factory
             'notes' => fake()->optional()->sentence(),
         ];
     }
+
+    public function configure(): static
+    {
+        return $this->afterMaking(function (\App\Models\Checkup $checkup) {
+            $implantedAt = $checkup->device?->implanted_at
+                ?? ($checkup->device_id ? Device::whereKey($checkup->device_id)->value('implanted_at') : null);
+
+            if ($implantedAt !== null && $checkup->checked_at !== null && $checkup->checked_at->lt($implantedAt)) {
+                $checkup->checked_at = fake()->dateTimeBetween($implantedAt, 'now');
+            }
+        });
+    }
 }
