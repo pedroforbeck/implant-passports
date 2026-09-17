@@ -6,8 +6,15 @@
     ];
 
     if ($currentUser->isAdmin()) {
+        $links[] = ['label' => 'Pacientes', 'route' => 'patients.index', 'active' => ['patients.*']];
+        $links[] = ['label' => 'Dispositivos', 'route' => 'devices.index', 'active' => ['devices.*', 'checkups.*']];
         $links[] = ['label' => 'Fabricantes', 'route' => 'manufacturers.index', 'active' => ['manufacturers.*']];
         $links[] = ['label' => 'Usuários', 'route' => 'users.index', 'active' => ['users.*']];
+    } elseif ($currentUser->isDoctor()) {
+        $links[] = ['label' => 'Pacientes', 'route' => 'patients.index', 'active' => ['patients.*']];
+        $links[] = ['label' => 'Dispositivos', 'route' => 'devices.index', 'active' => ['devices.*', 'checkups.*']];
+    } elseif ($currentUser->patientProfile) {
+        $links[] = ['label' => 'Meu passaporte', 'route' => 'patients.show', 'params' => $currentUser->patientProfile, 'active' => ['patients.show']];
     }
 @endphp
 
@@ -26,7 +33,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @foreach ($links as $link)
-                        <x-nav-link :href="route($link['route'])" :active="request()->routeIs(...$link['active'])">
+                        <x-nav-link :href="route($link['route'], $link['params'] ?? [])" :active="request()->routeIs(...$link['active'])">
                             {{ $link['label'] }}
                         </x-nav-link>
                     @endforeach
@@ -86,7 +93,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @foreach ($links as $link)
-                <x-responsive-nav-link :href="route($link['route'])" :active="request()->routeIs(...$link['active'])">
+                <x-responsive-nav-link :href="route($link['route'], $link['params'] ?? [])" :active="request()->routeIs(...$link['active'])">
                     {{ $link['label'] }}
                 </x-responsive-nav-link>
             @endforeach
