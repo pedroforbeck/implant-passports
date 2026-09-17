@@ -150,4 +150,17 @@ class CheckupTest extends TestCase
 
         $this->assertDatabaseMissing('checkups', ['id' => $checkup->id]);
     }
+
+    public function test_doctor_cannot_delete_checkup(): void
+    {
+        $doctor = User::factory()->doctor()->create();
+        $device = $this->makeDeviceFor($doctor);
+        $checkup = Checkup::factory()->for($device)->for($doctor, 'doctor')->create();
+
+        $this->actingAs($doctor)
+            ->delete(route('devices.checkups.destroy', [$device, $checkup]))
+            ->assertForbidden();
+
+        $this->assertDatabaseHas('checkups', ['id' => $checkup->id]);
+    }
 }
