@@ -117,7 +117,7 @@
                                 </td>
                                 <td class="px-6 py-4">{{ $device->status->label() }}</td>
                                 <td class="px-6 py-4 text-right whitespace-nowrap">
-                                    <a href="{{ route('devices.show', $device) class="text-indigo-600 hover:text-indigo-900">Ver</a>
+                                    <a href="{{ route('devices.show', $device) }}" class="text-indigo-600 hover:text-indigo-900">Ver</a>
                                 </td>
                             </tr>
                         @empty

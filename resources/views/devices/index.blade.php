@@ -3,7 +3,7 @@
         <div class="flex flex-wrap items-center justify-between gap-4">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dispositivos</h2>
 
-            @can('viewAny', App\Models\Patient::class)
+            @can('viewAny', App\Models\Device::class)
                 <x-link-button variant="secondary" :href="route('patients.index')">Escolher paciente</x-link-button>
             @endcan
         </div>

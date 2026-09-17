@@ -114,7 +114,7 @@
                     @endif
 
                     <div class="mt-4 pt-4 border-t border-gray-100">
-                        <a href="{{ route('devices.checkups.index', $device) class="text-sm font-medium text-indigo-600 hover:text-indigo-900">Ver histórico de avaliações →</a>
+                        <a href="{{ route('devices.checkups.index', $device) }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-900">Ver histórico de avaliações →</a>
                     </div>
                 </div>
             </div>
