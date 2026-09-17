@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 
     Route::middleware('role:admin')->group(function () {
@@ -21,7 +21,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('patients', PatientController::class)->except('destroy');
     Route::resource('patients.devices', DeviceController::class)->only(['create', 'store']);
     Route::resource('devices', DeviceController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
-    Route::resource('devices.checkups', CheckupController::class)->except('show');
+    Route::resource('devices.checkups', CheckupController::class)->except('show')->scoped(['checkup' => 'device_id']);
 });
 
 Route::middleware('auth')->group(function () {

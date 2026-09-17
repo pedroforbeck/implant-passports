@@ -7,6 +7,8 @@ use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Patient;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -37,7 +39,7 @@ class PatientController extends Controller
         return view('patients.create', [
             'patient' => new Patient,
             'doctors' => User::query()->withRole(Role::Doctor)->orderBy('name')->get(),
-            'patientAccounts' => User::query()->withRole(Role::Patient)->orderBy('name')->get(),
+            'patientAccounts' => $this->availablePatientAccounts(new Patient),
         ]);
     }
 
@@ -66,7 +68,7 @@ class PatientController extends Controller
         return view('patients.edit', [
             'patient' => $patient,
             'doctors' => User::query()->withRole(Role::Doctor)->orderBy('name')->get(),
-            'patientAccounts' => User::query()->withRole(Role::Patient)->orderBy('name')->get(),
+            'patientAccounts' => $this->availablePatientAccounts($patient),
         ]);
     }
 
@@ -77,5 +79,17 @@ class PatientController extends Controller
         return redirect()
             ->route('patients.show', $patient)
             ->with('success', 'Paciente atualizado.');
+    }
+
+    private function availablePatientAccounts(Patient $patient): Collection
+    {
+        return User::query()
+            ->withRole(Role::Patient)
+            ->where(function (Builder $query) use ($patient) {
+                $query->whereDoesntHave('patientProfile')
+                    ->orWhere('id', $patient->user_id);
+            })
+            ->orderBy('name')
+            ->get();
     }
 }
