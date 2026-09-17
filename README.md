@@ -6,8 +6,14 @@ Projeto final da disciplina, feito com **Laravel 12** e **PostgreSQL**.
 
 ## Integrantes
 
-- Sofia Scheidt Alves — [função/partes desenvolvidas]
-- Pedro Forbeck da Matta Oliveira — [função/partes desenvolvidas]
+- **Sofia Scheidt Alves** — CRUD (controllers e telas) de pacientes, dispositivos e acompanhamentos; correções de links quebrados e ajustes de policies de acesso; correções de bugs (403 para pacientes, dropdown de contas já vinculadas, scoped binding de acompanhamentos, factory de acompanhamentos, remoção do middleware `verified`); criação de usuários pelo administrador; ampliação da suíte de testes; documentação e configuração do ambiente local.
+- **Pedro Forbeck da Matta Oliveira** — configuração do projeto Laravel 12 + PostgreSQL; autenticação Breeze com perfis de acesso (role/middleware); seeder com contas de demonstração; tradução das mensagens para pt-BR; gestão de usuários e perfis para administradores; CRUD de fabricantes e regra de não remover fabricante com dispositivos vinculados; modelagem do banco (tabelas, models, factories e seeders) de pacientes, dispositivos e acompanhamentos; policies e validações dos formulários desses módulos.
+
+## Acesso
+
+- Repositório: [github.com/pedroforbeck/implant-passports](https://github.com/pedroforbeck/implant-passports)
+- Local (após a instalação abaixo): `php artisan serve` e abrir <http://127.0.0.1:8000>
+- Contas de demonstração na seção [Usuários para teste](#usuários-para-teste) — senha `password`.
 
 ## Requisitos do ambiente
 
