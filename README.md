@@ -50,3 +50,4 @@ Todos usam a senha `password`.
 
 - Pacientes não são apagáveis: o histórico clínico (dispositivos e acompanhamentos) deve ser preservado para fins médicos e legais.
 - Dispositivos e acompanhamentos podem ser removidos apenas por administradores.
+- O paciente não consegue vincular o próprio passaporte pela conta: o vínculo entre a conta de acesso e o registro do paciente é feito pelo médico ou administrador (limitação conhecida, para evitar apropriação indevida de dados clínicos).
