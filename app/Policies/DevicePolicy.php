@@ -13,6 +13,11 @@ class DevicePolicy
         return $user->isAdmin() ? true : null;
     }
 
+    public function viewAny(User $user): bool
+    {
+        return $user->isDoctor();
+    }
+
     public function view(User $user, Device $device): bool
     {
         return $user->can('view', $device->patient);
